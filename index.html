@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/comfy.js@latest/dist/comfy.min.js"></script>
+  </head>
+  <body>
+      <h1 id="yay"></h1>
+      <script type="text/javascript">
+        ComfyJS.onCommand = ( user, command, message, flags, extra ) => {
+          if(command === "test" ) {
+            console.log( "!test was typed in chat", extra );
+          }
+        }
+
+        ComfyJS.onChat = ( user, message, flags, self, extra ) => {
+          console.log( user, message, flags, self, extra );
+          document.querySelector('#yay').innerText=message;
+        }
+
+        ComfyJS.onReward = ( user, reward, cost, extra ) => {
+  console.log( user + " redeemed " + reward + " for " + cost );
+}
+        ComfyJS.Init( "lehuiiito" , '');
+      </script>
+  </body>
+</html>

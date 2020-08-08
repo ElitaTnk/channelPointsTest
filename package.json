@@ -1,0 +1,16 @@
+{
+  "name": "channelpointstest",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "comfy.js": "^1.1.3",
+    "dotenv": "^8.2.0",
+    "webwebweb": "^1.4.0"
+  }
+}
