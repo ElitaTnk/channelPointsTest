@@ -1,26 +1,110 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <script src="https://cdn.jsdelivr.net/npm/comfy.js@latest/dist/comfy.min.js"></script>
-  </head>
-  <body>
-      <h1 id="yay"></h1>
-      <script type="text/javascript">
-        ComfyJS.onCommand = ( user, command, message, flags, extra ) => {
-          if(command === "test" ) {
-            console.log( "!test was typed in chat", extra );
-          }
-        }
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Finger+Paint&display=swap" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/comfy.js@latest/dist/comfy.min.js"></script>
+    </head>
 
-        ComfyJS.onChat = ( user, message, flags, self, extra ) => {
-          console.log( user, message, flags, self, extra );
-          document.querySelector('#yay').innerText=message;
-        }
+    <body style="background-color: #000">
+        <h1 id="yay" style="font-family: 'Finger Paint', cursive; font-size: 70px; color: #fff; text-shadow: 1px 1px #000;"></h1>
+        <div class="images">
+            <!-- tbag -->
+            <div id="tbag" style='display: none; position:relative; padding-bottom:calc(56.25% + 44px)'><iframe src='https://gfycat.com/ifr/ApprehensiveThankfulKagu' frameborder='0' scrolling='no' width='100%' height='100%'
+                    style='position:absolute;top:0;left:0;' allowfullscreen></iframe></div>
 
-        ComfyJS.onReward = ( user, reward, cost, extra ) => {
-  console.log( user + " redeemed " + reward + " for " + cost );
-}
-        ComfyJS.Init( "lehuiiito" , '');
-      </script>
-  </body>
+            <div id="noGeneradores" style="display: none">
+                <img src="img/noGeneradores.jpg" alt="No Generadores" />
+            </div>
+
+            <div id="soltar" style="display: none">
+                <img src="img/soltarObjeto.jpg" alt="Solta el objeto" />
+            </div>
+
+            <div id="soltarSurvi" style="display: none">
+                <img src="img/soltarSurvi.jpg" alt="Solta al survi" />
+            </div>
+
+            <div id="doIt" style="display: none">
+                <img src="img/doIt.gif" alt="VIP" />
+            </div>
+
+            <div id="lobito" style="display: none">
+                <img src="img/lobito.jpg" alt="Lobito" />
+            </div>
+
+            <div id="vip" style="display: none">
+                <img src="img/diamond.gif" alt="VIP" />
+            </div>
+
+            <div id="noPallets" style="display: none">
+                <img src="img/noPallets.jpg" alt="No tires ni rompas Pallets" />
+            </div>
+        </div>
+        <script type="text/javascript">
+            // ComfyJS.onCommand = ( user, command, message, flags, extra ) => {
+            //   if(command === "test" ) {
+            //     console.log( "!test was typed in chat", extra );
+            //   }
+            // }
+            //
+            // ComfyJS.onChat = ( user, message, flags, self, extra ) => {
+            //   console.log( user, message, flags, self, extra );
+            //   document.querySelector('#yoy').innerText=message;
+            // }
+
+            ComfyJS.onReward = (user, reward, cost, message, extra) => {
+                customRewards(extra.reward.id);
+                document.querySelector('#yay').innerText = user + " quiere que  " + reward;
+                return setTimeout(() => document.querySelector('#yay').innerText = "", 9000);
+
+
+                console.log(user + " redeemed " + reward + " for " + cost, extra);
+            }
+
+            function customRewards(param) {
+                switch (param) {
+                    // tbag
+                    case '48f86254-812c-443a-bf2f-858ebbc4bbbc':
+                        document.querySelector('#tbag').style.display = "block";
+                        return setTimeout(() => document.querySelector('#tbag').style.display = "none", 9000);
+                        // no Generadores
+                    case '541ac9f6-cb01-4a16-887c-b2f91a875414':
+                        document.querySelector('#noGeneradores').style.display = "block";
+                        return setTimeout(() => document.querySelector('#noGeneradores').style.display = "none", 9000);
+                        // soltar objeto
+                    case '59f85284-daa1-4dd1-8f7b-82a964f38d4c':
+                        document.querySelector('#soltar').style.display = "block";
+                        return setTimeout(() => document.querySelector('#soltar').style.display = "none", 9000);
+
+                        // doIt
+                    case '951994c2-9aac-4328-aced-417c71229512':
+                        document.querySelector('#doIt').style.display = "block";
+                        return setTimeout(() => document.querySelector('#doIt').style.display = "none", 9000);
+
+                        // no pallets
+                    case '297c7dbb-5b4c-4fcc-80c3-9ac558c856a7':
+                        document.querySelector('#noPallets').style.display = "block";
+                        return setTimeout(() => document.querySelector('#noPallets').style.display = "none", 9000);
+
+                        // lobito
+                    case 'fdc8a44c-93bc-45e7-b4f2-d26fe5cb7bcd':
+                        document.querySelector('#lobito').style.display = "block";
+                        return setTimeout(() => document.querySelector('#lobito').style.display = "none", 9000);
+
+                        // vip
+                    case '5cef4b83-7671-4941-814e-dbba327325f5':
+                        document.querySelector('#vip').style.display = "block";
+                        return setTimeout(() => document.querySelector('#vip').style.display = "none", 9000);
+
+                        //solat survi
+                    case 'ab5df43f-a252-43da-ba86-05595a1a2b03':
+                        document.querySelector('#soltarSurvi').style.display = "block";
+                        return setTimeout(() => document.querySelector('#soltarSurvi').style.display = "none", 9000);
+
+                }
+            }
+            ComfyJS.Init("lehuiiito", '');
+        </script>
+    </body>
+
 </html>
