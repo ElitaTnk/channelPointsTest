@@ -24,10 +24,6 @@
     </head>
 
     <body style="text-align:center">
-        <iframe src="img/alarm.mp3" type="audio/mp3" allow="autoplay" id="player" style="display:none"></iframe>
-        <audio id="audio" controls="" style="visibility: hidden;">
-            <source id="source" type="audio/wav" src="img/alarm.mp3">
-          </audio>
         <div class="images">
             <!-- japish -->
             <div id="japish" style="display: none">
@@ -37,55 +33,47 @@
                   </audio>
             </div>
 
-            <div id="noGeneradores" style="display: none">
-                <div class="clock">
-
-                </div>
-                <img src="img/noGeneradores.jpg" alt="No Generadores" />
-                <p class="yay"></p>
-            </div>
-
-            <div id="soltar" style="display: none">
-                <img src="img/soltarObjeto.jpg" alt="Solta el objeto" />
-                <p class="yay"></p>
-            </div>
-
-            <div id="soltarSurvi" style="display: none">
-                <img src="img/soltarSurvi.jpg" alt="Solta al survi" />
-                <p class="yay"></p>
-            </div>
-
-            <div id="kichi" style="display: none">
-                <img src="img/patan.gif" alt="patan" />
-                <audio id="kichiAudio" controls="" style="visibility: hidden;">
-                    <source id="source" type="audio/wav" src="img/patan.ogg">
+            <div id="cursed" style="display: none">
+                <video width="640" height="480" id="cursedVideo">
+                  <source src="img/Mueveelvalototob.mp4" type="video/mp4">
+                </video>
+                <audio id="cursedAudio" controls="" style="visibility: hidden;">
+                    <source id="source" type="audio/wav" src="img/toto.ogg">
                   </audio>
             </div>
 
-            <div id="vip" style="display: none">
-                <img src="img/diamond.gif" alt="VIP" />
+            <div id="celia" style="display: none">
+                <video width="640" height="480" id="celiaVideo">
+                  <source src="img/celia1.mp4" type="video/mp4">
+                </video>
+                <!-- <audio id="cursedAudio" controls="" style="visibility: hidden;">
+                    <source id="source" type="audio/wav" src="img/toto.ogg">
+                  </audio> -->
+            </div>
+
+            <div id="hugoDiv"   style="    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;">
+                <img  id="hugo" style="display: none;" src="img/hugo.jpg" alt="hugo" />
+                <audio id="hugoAudio" controls="" style="visibility: hidden;">
+                  <source id="hugoAudioSource" type="audio/wav" src="img/hugo.ogg">
+                </audio>
                 <p class="yay"></p>
             </div>
 
-            <div id="noPallets" style="display: none">
-                <div class="clock">
 
-                </div>
-                <img src="img/noPallets.jpg" alt="No tires ni rompas Pallets" />
-                <p class="yay"></p>
-            </div>
         </div>
 
 
         <script type="text/javascript">
+        ComfyJS.onReward = (user, reward, cost, message, extra) => {
+               customRewards(user, reward, cost, message, extra.reward.id);
+               console.log(user + " redeemed " + reward + " for " + cost, extra);
+           }
+
             ComfyJS.onCommand = ( user, command, message, flags, extra ) => {
-                console.log(user, command, message, flags, extra)
-              if(command === "kichi" ) {
-                document.querySelector( "#kichiAudio" ).play()
-                const kichi = document.querySelector('#kichi');
-                kichi.style.display = "block";
-                return setTimeout(() => {kichi.style.display = "none"; document.querySelector( "#kichiAudio" ).pause(); document.querySelector( "#kichiAudio" ).currentTime = 0;}, 4000);
-              }
+                console.log("asass" , user, command, message, flags, extra)
 
               if(command === "japish") {
                   document.querySelector( "#japishAudio" ).play();
@@ -93,100 +81,111 @@
                   japish.style.display = "block";
                   return setTimeout(() => japish.style.display = "none" , 4000);
               }
-            }
 
-            function Countdown(quien, seconds) {
-              this.sec = seconds;
-              this.mins = seconds > 60? seconds/60 : 0;
 
-              tick();
+              if(command === "celia") {
+                  document.querySelector( "#celiaVideo" ).volume = 0.5;
+                  document.querySelector( "#celiaVideo" ).play();
+                  const celia = document.querySelector('#celia');
+                  celia.style.display = "block";
+                  return setTimeout(() => {
+                    document.querySelector( "#celiaVideo" ).pause();
+                    document.querySelector( "#celiaVideo" ).currentTime = 0;
+                    celia.style.display = "none";
+                  } , 18000);
+              }
 
-              function tick() {
-                  if(this.sec > 60){
-                      this.current_minutes = mins-1;
-                  }
-                  this.sec--;
-                  quien.getElementsByClassName('clock')[0].textContent = (!this.mins? '00' : this.current_minutes.toString()) + ':' + (this.sec < 10 ? '0' : '') + String(this.sec);
-                  if( this.sec > 0 ) {
-                      stopTime = setTimeout(tick, 1000);
-                  } else {
-                      if(this.mins > 1){
-                          countdown(this.mins-1);
-                      }
-                  }
+              if(command === "cursedvalo") {
+                  document.querySelector( "#cursedAudio" ).volume = 0.1;
+
+                  document.querySelector( "#cursedVideo" ).play();
+                  document.querySelector( "#cursedAudio" ).play();
+
+                  const cursed = document.querySelector('#cursed');
+                  cursed.style.display = "block";
+                  return setTimeout(() => {
+                    cursed.style.display = "none";
+                    document.querySelector( "#cursedAudio" ).pause(); document.querySelector( "#cursedAudio" ).currentTime = 0;
+                    document.querySelector( "#cursedVideo" ).pause(); document.querySelector( "#cursedVideo" ).currentTime = 0;
+                  }, 15000);
               }
             }
+
 
 
             function customRewards(user, reward, cost, message, param) {
                 switch (param) {
                     // tbag
-                    case '48f86254-812c-443a-bf2f-858ebbc4bbbc':
-                        const tbag = document.querySelector('#tbag');
-                        tbag.style.display = "block";
-                        const tbagText = tbag.getElementsByClassName('yay')[0];
-                        tbagText.innerText = user + " quiere que  " + reward;
-                        return setTimeout(() => tbag.style.display = "none", 9000);
+                    case '32e60522-3b3d-4f2b-976b-36f081d28edd':
+                      document.querySelector( "#hugoAudio" ).volume = 0.5;
+                      document.querySelector( "#hugoAudio" ).play();
+                      const hugo = document.querySelector('#hugo');
+                      const hugoDiv = document.querySelector('#hugoDiv');
+                      hugo.style.display = "block";
+                      const hugoText = hugoDiv.getElementsByClassName('yay')[0];
+                        hugo.style.display = "block";
+                        hugoText.innerText  = user + " dice  " + message;
+                      return setTimeout(() => { hugo.style.display = "none"; hugoText.style.display = "none"} , 6000);
                         // no Generadores
-                    case '541ac9f6-cb01-4a16-887c-b2f91a875414':
-                        const noGen = document.querySelector('#noGeneradores');
-                        const noGenText = noGen.getElementsByClassName('yay')[0];
-
-                        noGen.style.display = "block";
-                        noGenText.innerText = user + " quiere que  " + reward;
-                        Countdown(noGen, 10);
-                        return setTimeout(() => {noGen.style.display = "none"; elAudio.play()}, 10003);
-                        // soltar objeto
-                    case '59f85284-daa1-4dd1-8f7b-82a964f38d4c':
-                        const soltar = document.querySelector('#soltar');
-                        const soltarText = soltar.getElementsByClassName('yay')[0];
-                        soltar.style.display = "block";
-                        soltarText.innerText  = user + " quiere que  " + reward;
-                        return setTimeout(() => soltar.style.display = "none", 9000);
-
-                        // doIt
-                    case '951994c2-9aac-4328-aced-417c71229512':
-                        const doIt = document.querySelector('#doIt');
-                        doIt.style.display = "block";
-                        return setTimeout(() => doIt.style.display = "none", 9000);
-
-                        // no pallets
-                    case '297c7dbb-5b4c-4fcc-80c3-9ac558c856a7':
-                        const noPallets = document.querySelector('#noPallets');
-                        const noPalletsText = noPallets.getElementsByClassName('yay')[0];
-                        noPallets.style.display = "block";
-                        Countdown(noPallets, 10);
-                        noPalletsText.innerText  = user + " quiere que  " + reward;
-                        return setTimeout(() => {noPallets.style.display = "none"; elAudio.play()}, 10003);
-
-                        // lobito
-                    case 'fdc8a44c-93bc-45e7-b4f2-d26fe5cb7bcd':
-                        const lobito = document.querySelector('#lobito');
-                        const lobitoText = lobito.getElementsByClassName('yay')[0];
-                        lobito.style.display = "block";
-                        lobitoText.innerText  = user + " quiere que  " + reward;
-                        return setTimeout(() => lobito.style.display = "none", 9000);
-
-                        // vip
-                    case '5cef4b83-7671-4941-814e-dbba327325f5':
-                        const vip = document.querySelector('#vip');
-                        const vipText = vip.getElementsByClassName('yay')[0];
-                        vip.style.display = "block";
-                        vipText.innerText  = user + " quiere que  " + reward;
-                        return setTimeout(() => vip.style.display = "none", 9000);
-
-                        //solat survi
-                    case 'ab5df43f-a252-43da-ba86-05595a1a2b03':
-                        const soltarSurvi = document.querySelector('#soltarSurvi');
-                        const soltarSurviText = soltarSurvi.getElementsByClassName('yay')[0];
-                        soltarSurvi.style.display = "block";
-                        soltarSurviText.innerText  = user + " quiere que  " + reward;
-                        return setTimeout(() => soltarSurvi.style.display = "none", 9000);
+                  // case '541ac9f6-cb01-4a16-887c-b2f91a875414':
+                  //     const noGen = document.querySelector('#noGeneradores');
+                  //     const noGenText = noGen.getElementsByClassName('yay')[0];
+                  //
+                  //     noGen.style.display = "block";
+                  //     noGenText.innerText = user + " quiere que  " + reward;
+                  //     Countdown(noGen, 10);
+                  //     return setTimeout(() => {noGen.style.display = "none"; elAudio.play()}, 10003);
+                  //     // soltar objeto
+                  // case '59f85284-daa1-4dd1-8f7b-82a964f38d4c':
+                  //     const soltar = document.querySelector('#soltar');
+                  //     const soltarText = soltar.getElementsByClassName('yay')[0];
+                  //     soltar.style.display = "block";
+                  //     soltarText.innerText  = user + " quiere que  " + reward;
+                  //     return setTimeout(() => soltar.style.display = "none", 9000);
+                  //
+                  //     // doIt
+                  // case '951994c2-9aac-4328-aced-417c71229512':
+                  //     const doIt = document.querySelector('#doIt');
+                  //     doIt.style.display = "block";
+                  //     return setTimeout(() => doIt.style.display = "none", 9000);
+                  //
+                  //     // no pallets
+                  // case '297c7dbb-5b4c-4fcc-80c3-9ac558c856a7':
+                  //     const noPallets = document.querySelector('#noPallets');
+                  //     const noPalletsText = noPallets.getElementsByClassName('yay')[0];
+                  //     noPallets.style.display = "block";
+                  //     Countdown(noPallets, 10);
+                  //     noPalletsText.innerText  = user + " quiere que  " + reward;
+                  //     return setTimeout(() => {noPallets.style.display = "none"; elAudio.play()}, 10003);
+                  //
+                  //     // lobito
+                  // case 'fdc8a44c-93bc-45e7-b4f2-d26fe5cb7bcd':
+                  //     const lobito = document.querySelector('#lobito');
+                  //     const lobitoText = lobito.getElementsByClassName('yay')[0];
+                  //     lobito.style.display = "block";
+                  //     lobitoText.innerText  = user + " quiere que  " + reward;
+                  //     return setTimeout(() => lobito.style.display = "none", 9000);
+                  //
+                  //     // vip
+                  // case '5cef4b83-7671-4941-814e-dbba327325f5':
+                  //     const vip = document.querySelector('#vip');
+                  //     const vipText = vip.getElementsByClassName('yay')[0];
+                  //     vip.style.display = "block";
+                  //     vipText.innerText  = user + " quiere que  " + reward;
+                  //     return setTimeout(() => vip.style.display = "none", 9000);
+                  //
+                  //     //solat survi
+                  // case 'ab5df43f-a252-43da-ba86-05595a1a2b03':
+                  //     const soltarSurvi = document.querySelector('#soltarSurvi');
+                  //     const soltarSurviText = soltarSurvi.getElementsByClassName('yay')[0];
+                  //     soltarSurvi.style.display = "block";
+                  //     soltarSurviText.innerText  = user + " quiere que  " + reward;
+                  //     return setTimeout(() => soltarSurvi.style.display = "none", 9000);
 
                 }
             }
 
-            ComfyJS.Init("tinkereli", '');
+            ComfyJS.Init("tinkereli", 'S');
         </script>
     </body>
 
